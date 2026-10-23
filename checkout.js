@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
         syncSound();
       });
     });
-    // Audible autoplay may be permitted for returning/engaged visitors.
-    // Fall back to muted playback when the browser requires a user gesture.
     heroVideo.muted = false;
     heroVideo.play().then(syncSound).catch(() => {
       heroVideo.muted = true;
@@ -48,16 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
     tier: card.querySelector('h3').textContent.trim().toLowerCase(),
     price: card.querySelector('.rr-pass-price strong, .rr-pass-banner strong'), link: card.querySelector('a')
   })).filter(card => config.passes[card.tier]);
-  const money = value => '₹' + (value / 100).toLocaleString('en-IN', {
-    minimumFractionDigits: value % 100 ? 2 : 0, maximumFractionDigits: 2
-  });
   for (const c of cards) {
     const pass = config.passes[c.tier];
-    c.link.href = pass.url;
-    const discounted = Math.round(pass.amount * (100 - pass.discountPercent) / 100);
-    c.price.innerHTML = pass.discountPercent > 0
-      ? '<del class="rr-old-price">' + money(pass.amount) + '</del>' + money(discounted)
-      : money(pass.amount);
+    if (pass.url) c.link.href = pass.url;
     c.link.addEventListener('click', event => {
       if (Date.now() / 1000 >= config.eventEnd) event.preventDefault();
     });
@@ -68,9 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function render() {
     const now = Date.now() / 1000;
     const closed = now >= config.eventEnd;
-    for (const c of cards) {
-      c.link.textContent = closed ? 'Bookings closed' : (config.passes[c.tier].discountPercent > 0 ? 'Book with 30% Off' : 'Book ' + config.passes[c.tier].name + ' · ' + money(config.passes[c.tier].amount) + ' →');
-      c.link.setAttribute('aria-disabled', String(closed));
+    if (closed) {
+      for (const c of cards) {
+        c.link.textContent = 'Bookings closed';
+        c.link.setAttribute('aria-disabled', 'true');
+      }
     }
   }
   render();
