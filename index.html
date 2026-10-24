@@ -45,6 +45,87 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </style>
 <link rel="stylesheet" id="rr-mobile-css" href="./mobile.css" />
 <link rel="canonical" href="https://event.sahayakbusinessclub.com/" />
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1139914197263408');
+fbq('track', 'PageView');
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof fbq !== 'function') return;
+
+  // 1. Track Razorpay Ticket Bookings (InitiateCheckout with plan details and value)
+  document.querySelectorAll('a[href*="rzp.io/rzp/"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var href = this.getAttribute('href') || '';
+      var card = this.closest('.rr-pass-card');
+      var title = card ? (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '') : '';
+      var val = 1999;
+      if (href.indexOf('xhVRVjh') !== -1 || title.toLowerCase().indexOf('gold') !== -1) {
+        val = 3499;
+        title = 'Gold';
+      } else if (href.indexOf('LbQgD2A3') !== -1 || title.toLowerCase().indexOf('vip') !== -1) {
+        val = 20999;
+        title = 'VIP';
+      } else {
+        val = 1999;
+        title = 'Silver';
+      }
+
+      fbq('track', 'InitiateCheckout', {
+        content_name: title + ' Pass',
+        content_category: 'Ticket',
+        value: val,
+        currency: 'INR'
+      });
+    });
+  });
+
+  // 2. Track WhatsApp Clicks (Contact event)
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      fbq('track', 'Contact', {
+        content_name: 'WhatsApp Inquiry',
+        channel: 'WhatsApp'
+      });
+    });
+  });
+
+  // 3. Track Book My Seat CTA Clicks (Lead / Custom CTA)
+  document.querySelectorAll('a').forEach(function(link) {
+    if (link.textContent && link.textContent.trim().toLowerCase().indexOf('book my seat') !== -1) {
+      link.addEventListener('click', function() {
+        fbq('trackCustom', 'BookMySeatClick', {
+          button_text: 'Book My Seat'
+        });
+      });
+    }
+  });
+
+  // 4. Track Direct Phone Calls and Email Links
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      fbq('trackCustom', 'PhoneCallClick', { phone: this.getAttribute('href') });
+    });
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      fbq('trackCustom', 'EmailClick', { email: this.getAttribute('href') });
+    });
+  });
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1139914197263408&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head><body class="home wp-singular page-template-default page page-id-29 wp-theme-red-rega-event"><div id="rr-top" class="sticky top-0 z-40 bg-navy px-3 py-2 text-center text-[11px] font-semibold leading-tight text-navy-foreground sm:text-[13px]">RED &amp; REGA Delhi Edition · 31 Oct. 2026 · 8:30 AM–6:00 PM</div><main class="pb-28 md:pb-24"><section  class="relative isolate overflow-hidden px-5 md:px-8 bg-background rr-hero text-foreground section-pad"><div class="relative mx-auto w-full max-w-6xl"><div class="mx-auto max-w-3xl text-center"><span class="label-caps inline-flex rounded-full bg-gold-soft px-4 py-2 text-gold-deep">RED · Real Estate Dominator</span><h1 class="h1-display mt-5">Sell Better. <span class="text-blue">Close Faster.</span><br>Build <span class="gold-underline">Higher Income.</span></h1><p class="mt-3 text-xl font-bold text-red md:text-2xl">A Full Day Workshop by Shashish Kumar Tiwari</p><p class="body-lg mx-auto mt-4 max-w-2xl text-muted-foreground">Practical systems to sharpen sales, communication, visibility and sustainable business growth.</p></div><div class="rr-hero-banner rr-hero-video relative mx-auto mt-6 w-full max-w-4xl overflow-hidden rounded-2xl border border-border shadow-card"><video controls autoplay playsinline preload="auto" width="1280" height="720" aria-label="RED and REGA workshop introduction by Shashish Kumar Tiwari" aria-describedby="rr-video-timing" poster="./red-workshop-hero-mobile-960.webp"><source src="./red-rega-workshop-hero.mp4" type="video/mp4">
 <source src="https://skt.zaptriq.in/wp-content/uploads/2026/09/red-rega-workshop-hero.mp4" type="video/mp4">Your browser does not support video playback. <a href="./red-rega-workshop-hero.mp4">Watch the workshop video</a>.</video><button class="rr-video-unmute" type="button" hidden>🔊 Tap for sound</button></div><p id="rr-video-timing" class="rr-hero-video-note"><span class="rr-video-sound-note">Sound starts automatically when your browser allows it.</span><strong>31 October 2026 · Updated timing: 8:30 AM–6:00 PM IST</strong><span>Please follow the updated timing above; the video mentions an earlier schedule.</span></p><div class="mt-8 text-center"><a class="lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg px-6 text-center text-base font-bold leading-tight transition-transform duration-150 active:translate-y-px sm:w-auto sm:min-w-[300px] sm:px-9 bg-red text-red-foreground shadow-cta hover:bg-red-dark" href="#participate">Book My Seat</a></div><div class="mx-auto mt-6 max-w-2xl rounded-2xl border border-border bg-card p-5 text-center shadow-card"><p class="text-xl font-extrabold text-blue">Shashish Kumar Tiwari</p><p class="mt-2 text-sm font-semibold text-muted-foreground">Motivational Speaker · Business Coach · Corporate Trainer · Author</p></div></div></section><section id="workshop-for-you" class="rr-audience"><div class="rr-audience-inner"><p class="rr-audience-eyebrow">REAL ESTATE DOMINATOR</p><h2>THIS WORKSHOP IS <span>FOR YOU IF…</span></h2><div class="rr-audience-grid"><article class="rr-audience-pain"><h3>You are tired of:</h3><ul><li><span aria-hidden="true">❌</span><span>Chasing unqualified leads</span></li><li><span aria-hidden="true">❌</span><span>Following up with no response</span></li><li><span aria-hidden="true">❌</span><span>Losing deals at the last moment</span></li><li><span aria-hidden="true">❌</span><span>Giving discounts just to close</span></li><li><span aria-hidden="true">❌</span><span>Depending on referrals or random enquiries</span></li><li><span aria-hidden="true">❌</span><span>Working harder without seeing your income grow</span></li><li><span aria-hidden="true">❌</span><span>Ending every month wondering, “Where did the business go?”</span></li></ul></article><article class="rr-audience-ready"><h3>And you are ready to:</h3><ul><li><span aria-hidden="true">✅</span><span>Generate better opportunities</span></li><li><span aria-hidden="true">✅</span><span>Convert more prospects</span></li><li><span aria-hidden="true">✅</span><span>Close with confidence</span></li><li><span aria-hidden="true">✅</span><span>Build a predictable sales process</span></li><li><span aria-hidden="true">✅</span><span>Increase your productivity</span></li><li><span aria-hidden="true">✅</span><span>And create a clear path towards 2X or more income</span></li></ul></article></div><a class="rr-audience-cta" href="#participate">Book My Seat</a></div></section><section id="event-details" class="relative isolate overflow-hidden px-5 md:px-8 bg-ice text-foreground section-pad"><div class="relative mx-auto w-full max-w-6xl"><div class="mx-auto max-w-3xl text-center"><span class="label-caps inline-flex items-center gap-2 rounded-full px-4 py-2 bg-gold-soft text-gold-deep"><span aria-hidden="true" class="text-[8px]">●</span>Event Details</span><h2 class="h2-section mt-4">Your Workshop <span class="text-blue">at a Glance</span></h2><p class="body-lg mx-auto mt-3 max-w-2xl text-muted-foreground">Plan your day of learning, connections and professional growth.</p></div><div class="rr-grid rr-grid-3 mt-6"><div class="rounded-2xl border border-border bg-card p-5 shadow-card"><p class="label-caps text-muted-foreground">Date</p><p class="mt-2 text-xl font-extrabold">31 Oct. 2026</p></div><div class="rounded-2xl border border-border bg-card p-5 shadow-card"><p class="label-caps text-muted-foreground">Time</p><p class="mt-2 text-xl font-extrabold">8:30 AM–6:00 PM</p><p class="mt-1 text-sm text-muted-foreground">Full-day experience</p></div><div class="rounded-2xl border border-border bg-card p-5 shadow-card"><p class="label-caps text-muted-foreground">Location</p><p class="mt-2 text-xl font-extrabold">Holiday Inn, Mayur Vihar, Delhi</p></div></div><div class="mt-6 overflow-hidden rounded-2xl border-2 border-dashed border-gold-light p-2"><img src="./venue-ballroom-representative-mobile-480.webp" alt="Representative five-star hotel ballroom prepared for the RED and REGA event" class="w-full rounded-xl object-cover rr-venue-img" srcset="./venue-ballroom-representative-mobile-480.webp 480w, ./venue-ballroom-representative-mobile-960.webp 960w, ./venue-ballroom-representative.png 1600w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 50vw, 700px" loading="lazy" decoding="async"><p class="px-2 pt-3 pb-2 text-sm text-muted-foreground">Representative venue visual</p></div><div class="mt-8 text-center"><a class="lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg px-6 text-center text-base font-bold leading-tight transition-transform duration-150 active:translate-y-px sm:w-auto sm:min-w-[300px] sm:px-9 bg-red text-red-foreground shadow-cta hover:bg-red-dark" href="#participate">Book My Seat</a></div></div></section><section class="rr-passes" id="participate" aria-labelledby="rr-passes-title"><div class="rr-section-head"><p>Choose Your Experience</p><h2 id="rr-passes-title">Choose Your Ticket</h2><p class="rr-ticket-instruction">Select your preferred seating below to proceed to payment.</p><span>31 Oct. 2026 · 8:30 AM to 6:00 PM · Delhi</span></div><div class="rr-pass-grid">
 			<article class="rr-pass-card rr-pass-card--silver"><div class="rr-pass-banner" style="--pass-bg:url('./pass-silver-v2-mobile-960.webp')"><div><span>RED &amp; REGA</span><h3>Silver</h3></div></div><div class="rr-pass-pricing"><div class="rr-pass-price"><div class="rr-old-price"><del style="text-decoration:line-through;color:#999;font-size:15px;display:block;margin-bottom:2px;">₹5,999</del></div><strong>₹1,999</strong><span class="rr-pass-unit">Per attendee</span></div><div class="rr-pass-discount" style="flex:none;padding:6px 10px;border-radius:8px;border:1px solid rgba(239,85,88,0.3);background:rgba(229,45,50,0.1);color:#ff6b6b;font-size:12px;font-weight:700;">67% OFF</div></div><ul><li class="rr-pass-seating"><b>Theatre Style Seating</b><span>Back Rows</span></li><li>AM Tea + PM Tea + Lunch</li><li>Standard event access</li><li>Premium hospitality</li><li>Curated networking</li><li>Programme resources</li></ul><a href="https://rzp.io/rzp/V1CQdoH">Book with 67% off</a></article>
